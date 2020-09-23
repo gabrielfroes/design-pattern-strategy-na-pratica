@@ -7,38 +7,85 @@ include_once "shipping/dhl.php";
 include_once "shipping/fedex.php";
 include_once "shipping/jadlog.php";
 include_once "shipping/tnt.php";
+include_once "shipping/mercadoenvio.php";
 
-class Frete {
+// Strategy
+interface FreteServico{
+    function calcula(float $peso): float;
+}
 
-    public function calcula($servico, $peso) {
+// Concrete Strategy
+class Sedex implements FreteServico {
+    function calcula(float $peso): float {
+        $correios = new \Correios();
+        $valorTotal = $correios->calculaRemessa("SEDEX", $peso);
+        return $valorTotal;
+    }
+}
 
-        if($servico == "sedex") {
-            $correios = new \Correios();
-            $valorTotal = $correios->calculaRemessa("SEDEX", $peso);
+class Pac implements FreteServico {
+    function calcula(float $peso): float {
+        $correios = new \Correios();
+        $valorTotal = $correios->calculaRemessa("PAC", $peso);
+        return $valorTotal;
+    }
+}
 
-        } else if($servico == "pac") {
-            $correios = new \Correios();
-            $valorTotal = $correios->calculaRemessa("PAC", $peso);
+class MercadoEnvio implements FreteServico {
+    function calcula(float $peso): float {
+        $correios = new \MercadoEnvio();
+        $valorTotal = $correios->calcula($peso);
+        return $valorTotal;
+    }
+}
 
-        } else if($servico == "jadlog") {
+
+class JadLog implements FreteServico {
+    function calcula(float $peso): float {
             $valorTotal = calculaFreteJadLog($peso);
+            return $valorTotal;
+    }
+}
 
-        } else if($servico == "dhl") {
+class DHL implements FreteServico {
+    function calcula(float $peso): float {
             $dhl = new \DHL();
             $valorTotal = $dhl->priceCalculator($peso);
+            return $valorTotal;
+    }
+}
 
-        } else if($servico == "fedex") {
+class Fedex implements FreteServico {
+    function calcula(float $peso): float {
             $fedex = new \Fedex();
             $valorTotal = $fedex->shippingPrice($peso);
-            
-        } else if($servico == "tnt") {
+            return $valorTotal;
+    }
+}
+
+class TNT implements FreteServico {
+    function calcula(float $peso): float {
             $tnt = new \TNT();
             $valorTotal = $tnt->shippingPriceCalculator($peso);
+            return $valorTotal;
+    }
+}
 
-        } else {
-            throw new Exception('Serviço de frete inválido');
-        }
-        
+// Context
+class Frete {
+
+    private $servico;
+
+    function __construct (FreteServico $servico){
+        $this->servico = $servico;
+    }
+
+    function setServico (FreteServico $servico){
+        $this->servico = $servico;
+    }
+
+    function calcula($peso) {
+        $valorTotal = $this->servico->calcula($peso);
         return $valorTotal;
     }
 
