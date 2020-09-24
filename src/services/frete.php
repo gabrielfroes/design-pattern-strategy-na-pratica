@@ -33,8 +33,8 @@ class Pac implements FreteServico {
 
 class MercadoEnvio implements FreteServico {
     function calcula(float $peso): float {
-        $correios = new \MercadoEnvio();
-        $valorTotal = $correios->calcula($peso);
+        $mercadoenvio = new \MercadoEnvio();
+        $valorTotal = $mercadoenvio->calcula($peso);
         return $valorTotal;
     }
 }
