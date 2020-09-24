@@ -9,9 +9,9 @@ Nesse projeto estamos utilizando a linguagem PHP porém o conceito pode ser apli
 
 ## Instalação
 
-Adicionamos ao projeto o arquivo `Dockerfile` e o `docker-compose.yml` caso queira rodar o código em ambiente containerizado.
+Adicionamos ao projeto o arquivo `Dockerfile` e o `docker-compose.yml` caso queira rodar o código PHP em ambiente containerizado.
 
-Para rodar o container basta usar o comando:
+Para rodar o container é necessário ter o Docker instalado e basta usar o comando:
 
 ```bash
 docker-compose -f "docker-compose.yml" up -d --build
@@ -19,7 +19,7 @@ docker-compose -f "docker-compose.yml" up -d --build
 
 ## Vídeo Aula
 
-Para entender melhor o código desse repositório e nossas explicações sobre o pattern *Strategy* no Youtube é só [assistir ao nosso vídeo no Código Fonte TV](https://youtu.be/qRljs4EyvLE).
+Para entender melhor o código desse repositório e nossas explicações sobre o design pattern *Strategy* no Youtube é só assistir [nosso vídeo no Código Fonte TV](https://youtu.be/WPdrnuSHAQs).
 
 ## Autores
 
