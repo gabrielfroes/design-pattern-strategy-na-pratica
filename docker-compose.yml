@@ -6,4 +6,4 @@ services:
         ports: 
             - 8080:80
         volumes: 
-            - ./src:/var/www/html/
+            - ./:/var/www/cftv
