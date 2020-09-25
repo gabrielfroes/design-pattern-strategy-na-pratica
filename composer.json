@@ -1,0 +1,25 @@
+{
+    "name": "cftv/design-pattern-strategy-na-pratica",
+    "type": "project",
+    "authors": [
+        {
+            "name": "cftv",
+            "email": "codigo@fonte.tv"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "scripts": {
+        "test": "pest"
+    },
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "9.3.10",
+        "pestphp/pest": "^0.3.6"
+    }
+}
