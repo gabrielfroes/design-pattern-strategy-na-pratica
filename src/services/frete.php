@@ -90,3 +90,22 @@ class Frete {
     }
 
 }
+
+abstract class StrategyFrete{
+    private FreteServico $servico;
+    public function calcula(float $peso) : float {
+        $valorTotal = $this->servico->calcula($peso);
+        return $valorTotal;
+    }
+    
+    public function setServico (FreteServico $servico){
+        $this->servico = $servico;
+    }
+}
+
+class DHLFrete extends StrategyFrete{
+    public function __construct(){
+        $this->servico = new DHL;
+    }
+}
+
