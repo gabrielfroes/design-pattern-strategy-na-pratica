@@ -74,7 +74,7 @@ class TNT implements FreteServico {
 // Context
 class Frete {
 
-    private $servico;
+    private FreteServico $servico;
 
     function __construct (FreteServico $servico){
         $this->servico = $servico;
