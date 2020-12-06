@@ -2,15 +2,14 @@
 
 include_once "services/frete.php";
 
-$sedex = new \Services\Sedex();
-$dhl = new \Services\DHL();
-$me = new \Services\MercadoEnvio();
-
-$frete = new \Services\Frete($sedex);
+$frete = new \Services\Frete(new \Services\Sedex());
 echo $frete->calcula(10);
 
-$frete->setServico($dhl);
+$frete->setServico(new \Services\DHL());
 echo '<br>' . $frete->calcula(10);
 
-$frete->setServico($me);
+$frete->setServico(new \Services\MercadoEnvio());
+echo '<br>' . $frete->calcula(10);
+
+$frete = new \Services\DHLFrete();
 echo '<br>' . $frete->calcula(10);
